@@ -2,28 +2,38 @@ const db = require("../models");
 const Ingredient = db.ingredient;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Ingredient
+// Create and save a new Ingredient
 exports.create = async (req, res) => {
   // Validate request
-  if (req.body.name === undefined) {
-    const error = new Error("Name cannot be empty for ingredient!");
+  if (req.body.title === undefined) {
+    const error = new Error("Title cannot be empty!");
     error.statusCode = 400;
     throw error;
-  } else if (req.body.unit === undefined) {
-    const error = new Error("Unit cannot be empty for ingredient!");
+  } else if (req.body.description === undefined) {
+    const error = new Error("Description cannot be empty!");
     error.statusCode = 400;
     throw error;
-  } else if (req.body.pricePerUnit === undefined) {
-    const error = new Error("Price per unit cannot be empty for ingredient!");
+  } else if (req.body.ticketPrice === undefined) {
+    const error = new Error("Ticket price cannot be empty!");
+    error.statusCode = 400;
+    throw error;
+  } else if (req.body.dateTime === undefined) {
+    const error = new Error("Datetime cannot be empty!");
+    error.statusCode = 400;
+    throw error;
+  } else if (req.body.attendeeCount === undefined) {
+    const error = new Error("Attendee count cannot be empty!");
     error.statusCode = 400;
     throw error;
   }
 
   // Create a Ingredient
-  const ingredient = {
-    name: req.body.name,
-    unit: req.body.unit,
-    pricePerUnit: req.body.pricePerUnit,
+  const ingredient = { // made id autoincrement so its already handled automatically, no need to mention it here
+    title: req.body.title,
+    description: req.body.description,
+    ticketPrice: req.body.ticketPrice,
+    dateTime: req.body.dateTime,
+    attendeeCount: req.body.attendeeCount,
   };
   // Save Ingredient in the database
   try {
@@ -42,14 +52,14 @@ exports.findAll = async (req, res) => {
   const ingredientId = req.query.ingredientId;
   var condition = ingredientId
     ? {
-        id: {
-          [Op.like]: `%${ingredientId}%`,
-        },
-      }
+      id: {
+        [Op.like]: `%${ingredientId}%`,
+      },
+    }
     : null;
 
   try {
-    const data = await Ingredient.findAll({ where: condition, order: [["name", "ASC"]] });
+    const data = await Ingredient.findAll({ where: condition, order: [["title", "ASC"]] });
     res.send(data);
   } catch (err) {
     res.status(500).send({

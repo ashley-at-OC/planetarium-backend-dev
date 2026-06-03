@@ -32,9 +32,11 @@ const run = async () => {
     });
 
     const ingredient1 = await db.ingredient.create({
-      name: "Flour",
-      unit: "cups",
-      pricePerUnit: 2.5,
+      title: "Event",
+      description: "...",
+      ticketPrice: 12,
+      dateTime: new Date("2025-01-01T12:00:00"),
+      attendeeCount: 25,
     });
 
     const ingredient2 = await db.ingredient.create({
