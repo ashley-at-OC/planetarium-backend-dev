@@ -5,25 +5,42 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Ingredient
 exports.create = async (req, res) => {
   // Validate request
-  if (req.body.name === undefined) {
-    const error = new Error("Name cannot be empty for ingredient!");
-    error.statusCode = 400;
-    throw error;
-  } else if (req.body.unit === undefined) {
-    const error = new Error("Unit cannot be empty for ingredient!");
-    error.statusCode = 400;
-    throw error;
-  } else if (req.body.pricePerUnit === undefined) {
-    const error = new Error("Price per unit cannot be empty for ingredient!");
+  if (!req.body.name) {
+    const error = new Error("Name cannot be empty for an ingredient!");
     error.statusCode = 400;
     throw error;
   }
 
+  if (!req.body.description) {
+    const error = new Error("Description cannot be empty for an ingredient!");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  if (req.body.price === undefined) {
+    const error = new Error("Price cannot be empty for an ingredient!");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  if (req.body.duration === undefined) {
+    const error = new Error("Duration cannot be empty for an ingredient!");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  // image is optional
+  // id, createdAt, and updatedAt are handled by Sequelize
+
+
+
   // Create a Ingredient
   const ingredient = {
     name: req.body.name,
-    unit: req.body.unit,
-    pricePerUnit: req.body.pricePerUnit,
+    description: req.body.description,
+    price: req.body.price,
+    duration: req.body.duration,
+
   };
   // Save Ingredient in the database
   try {
@@ -42,14 +59,14 @@ exports.findAll = async (req, res) => {
   const ingredientId = req.query.ingredientId;
   var condition = ingredientId
     ? {
-        id: {
-          [Op.like]: `%${ingredientId}%`,
-        },
-      }
+      id: {
+        [Op.like]: `%${ingredientId}%`,
+      },
+    }
     : null;
 
   try {
-    const data = await Ingredient.findAll({ where: condition, order: [["name", "ASC"]] });
+    const data = await Ingredient.findAll({ where: condition, order: [["name", "ASC"]] }); // in ascending order
     res.send(data);
   } catch (err) {
     res.status(500).send({

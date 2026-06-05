@@ -19,8 +19,8 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
     image: {
-      type: Sequelize.LONGBLOB, // to test without images
-      allowNull: true,
+      type: Sequelize.BLOB("long"), // deal with uploading images later
+      allowNull: true, // to test without images
     },
     duration: {
       type: Sequelize.INTEGER,
