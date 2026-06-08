@@ -21,6 +21,7 @@ db.recipeIngredient = require("./recipeIngredient.model.js")(
   sequelize,
   Sequelize
 );
+db.seat = require("./seat.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 

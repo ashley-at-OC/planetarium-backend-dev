@@ -32,15 +32,17 @@ const run = async () => {
     });
 
     const ingredient1 = await db.ingredient.create({
-      name: "Flour",
-      unit: "cups",
-      pricePerUnit: 2.5,
+      name: "Cosmic Journey",
+      description: "A trip through the solar system.",
+      price: 15.0,
+      duration: 60,
     });
 
     const ingredient2 = await db.ingredient.create({
-      name: "Sugar",
-      unit: "cups",
-      pricePerUnit: 1.75,
+      name: "Stars of Summer",
+      description: "Constellations visible in the northern sky.",
+      price: 12.0,
+      duration: 45,
     });
 
     const recipe = await db.recipe.create({
@@ -77,6 +79,24 @@ const run = async () => {
       recipeStepId: null,
       ingredientId: ingredient2.id,
     });
+
+    // Seed 60 seats: 6 rows (A-F) x 10 columns. A1, A2, A9, A10 are handicap.
+    const rows = ["A", "B", "C", "D", "E", "F"];
+    const handicapSeats = new Set(["A1", "A2", "A9", "A10"]);
+    const seatsToCreate = [];
+    for (const row of rows) {
+      for (let col = 1; col <= 10; col++) {
+        const seatNumber = `${row}${col}`;
+        seatsToCreate.push({
+          seatNumber,
+          seatRow: row,
+          seatColumn: col,
+          seatType: handicapSeats.has(seatNumber) ? "handicap" : "regular",
+        });
+      }
+    }
+    const seats = await db.seat.bulkCreate(seatsToCreate);
+    console.log(`Seeded ${seats.length} seats.`);
 
     const session = await db.session.create({
       email: user.email,
