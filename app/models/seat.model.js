@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     seatColumn: {
       type: Sequelize.INTEGER,
-      allowNull: false, 
+      allowNull: false,
     },
     seatType: {
       type: Sequelize.ENUM("regular", "handicap"),
