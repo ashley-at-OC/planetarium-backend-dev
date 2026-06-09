@@ -16,5 +16,11 @@ module.exports = (app) => {
     router.get("/ingredients/:ingredientId/showtimes", Showtime.findAllShowtimesForShow);
 
 
+    // Update a Showtime with id
+    router.put("/ingredients/:ingredientId/showtimes/:id", Showtime.update);
+    // Delete a Showtime with id
+    router.delete(
+        "/ingredients/:ingredientId/showtimes/:id", Showtime.delete);
+
     app.use("/recipeapi", router);
 }
