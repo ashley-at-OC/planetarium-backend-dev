@@ -40,12 +40,9 @@ const run = async () => {
 
     console.log("Seed data created:", {
       userId: user.id,
-      ingredient1Id: ingredient1.id,
-      ingredient2Id: ingredient2.id,
       recipeId: recipe.id,
       step1Id: step1.id,
       step2Id: step2.id,
-      recipeIngredientId: recipeIngredient.id,
       sessionId: session.id,
     });
 
