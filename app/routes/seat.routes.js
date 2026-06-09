@@ -1,4 +1,4 @@
-// Routes for Seat endpoints. Mounted at /recipeapi endpoints are /recipeapi/seats.
+// Routes for seat endpoints. Endpoints are /recipeapi/seats.
 module.exports = (app) => {
   const Seat = require("../controllers/seat.controller.js");
   var router = require("express").Router();
