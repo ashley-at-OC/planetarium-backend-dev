@@ -21,11 +21,11 @@ db.recipeIngredient = require("./recipeIngredient.model.js")(
   sequelize,
   Sequelize
 );
+db.seat = require("./seat.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.show = require("./show.model.js")(sequelize, Sequelize);
 db.showtime = require("./showtime.model.js")(sequelize, Sequelize);
-db.seat = require("./seat.model.js")(sequelize, Sequelize);
 db.booking = require("./booking.model.js")(sequelize, Sequelize);
 db.ticket = require("./ticket.model.js")(sequelize, Sequelize);
 db.paymentTransaction = require("./paymentTransaction.model.js")(sequelize, Sequelize);

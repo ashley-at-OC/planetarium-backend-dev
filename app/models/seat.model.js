@@ -5,6 +5,14 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       unique: true,
     },
+    seatRow: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    seatColumn: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     seatType: {
       type: Sequelize.ENUM("regular", "handicap"),
       allowNull: false,
@@ -16,6 +24,5 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: true,
     },
   });
-
   return Seat;
 };

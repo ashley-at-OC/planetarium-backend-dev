@@ -32,6 +32,24 @@ const run = async () => {
     });
 
 
+    // Seed 60 seats: 6 rows (A-F) x 10 columns. A1, A2, A9, A10 are handicap.
+    const rows = ["A", "B", "C", "D", "E", "F"];
+    const handicapSeats = new Set(["A1", "A2", "A9", "A10"]);
+    const seatsToCreate = [];
+    for (const row of rows) {
+      for (let col = 1; col <= 10; col++) {
+        const seatNumber = `${row}${col}`;
+        seatsToCreate.push({
+          seatNumber,
+          seatRow: row,
+          seatColumn: col,
+          seatType: handicapSeats.has(seatNumber) ? "handicap" : "regular",
+        });
+      }
+    }
+    const seats = await db.seat.bulkCreate(seatsToCreate);
+    console.log(`Seeded ${seats.length} seats.`);
+
     const session = await db.session.create({
       email: user.email,
       userId: user.id,
