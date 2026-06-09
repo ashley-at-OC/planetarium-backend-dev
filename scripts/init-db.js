@@ -31,52 +31,6 @@ const run = async () => {
       salt: salt,
     });
 
-    const ingredient1 = await db.ingredient.create({
-      name: "Flour",
-      unit: "cups",
-      pricePerUnit: 2.5,
-    });
-
-    const ingredient2 = await db.ingredient.create({
-      name: "Sugar",
-      unit: "cups",
-      pricePerUnit: 1.75,
-    });
-
-    const recipe = await db.recipe.create({
-      name: "Pancakes",
-      description: "A simple pancake recipe",
-      servings: 4,
-      time: 20,
-      isPublished: true,
-      userId: user.id,
-    });
-
-    const step1 = await db.recipeStep.create({
-      stepNumber: 1,
-      instruction: "Mix flour and sugar.",
-      recipeId: recipe.id,
-    });
-
-    const step2 = await db.recipeStep.create({
-      stepNumber: 2,
-      instruction: "Cook on a hot skillet until golden.",
-      recipeId: recipe.id,
-    });
-
-    const recipeIngredient = await db.recipeIngredient.create({
-      quantity: 2,
-      recipeId: recipe.id,
-      recipeStepId: step1.id,
-      ingredientId: ingredient1.id,
-    });
-
-    const recipeIngredientWithoutStep = await db.recipeIngredient.create({
-      quantity: 1,
-      recipeId: recipe.id,
-      recipeStepId: null,
-      ingredientId: ingredient2.id,
-    });
 
     const session = await db.session.create({
       email: user.email,
