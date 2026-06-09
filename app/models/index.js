@@ -114,12 +114,12 @@ db.booking.belongsTo(db.user, {
 // Show -> Showtimes
 db.show.hasMany(db.showtime, {
   as: "showtimes",
-  foreignKey: { allowNull: false },
+  foreignKey: "ingredientId",
   onDelete: "CASCADE",
 });
-db.showtime.belongsTo(db.show, {
-  as: "show",
-  foreignKey: { allowNull: false },
+db.showtime.belongsTo(db.ingredient, {
+  as: "ingredient",
+  foreignKey: "ingredientId",
   onDelete: "CASCADE",
 });
 

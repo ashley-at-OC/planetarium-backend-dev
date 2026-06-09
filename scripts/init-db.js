@@ -31,26 +31,6 @@ const run = async () => {
       salt: salt,
     });
 
-    const recipe = await db.recipe.create({
-      name: "Pancakes",
-      description: "A simple pancake recipe",
-      servings: 4,
-      time: 20,
-      isPublished: true,
-      userId: user.id,
-    });
-
-    const step1 = await db.recipeStep.create({
-      stepNumber: 1,
-      instruction: "Mix flour and sugar.",
-      recipeId: recipe.id,
-    });
-
-    const step2 = await db.recipeStep.create({
-      stepNumber: 2,
-      instruction: "Cook on a hot skillet until golden.",
-      recipeId: recipe.id,
-    });
 
     const session = await db.session.create({
       email: user.email,
