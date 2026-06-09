@@ -31,18 +31,6 @@ const run = async () => {
       salt: salt,
     });
 
-    const ingredient1 = await db.ingredient.create({
-      name: "Flour",
-      unit: "cups",
-      pricePerUnit: 2.5,
-    });
-
-    const ingredient2 = await db.ingredient.create({
-      name: "Sugar",
-      unit: "cups",
-      pricePerUnit: 1.75,
-    });
-
     const recipe = await db.recipe.create({
       name: "Pancakes",
       description: "A simple pancake recipe",
@@ -64,20 +52,6 @@ const run = async () => {
       recipeId: recipe.id,
     });
 
-    const recipeIngredient = await db.recipeIngredient.create({
-      quantity: 2,
-      recipeId: recipe.id,
-      recipeStepId: step1.id,
-      ingredientId: ingredient1.id,
-    });
-
-    const recipeIngredientWithoutStep = await db.recipeIngredient.create({
-      quantity: 1,
-      recipeId: recipe.id,
-      recipeStepId: null,
-      ingredientId: ingredient2.id,
-    });
-
     const session = await db.session.create({
       email: user.email,
       userId: user.id,
@@ -86,12 +60,9 @@ const run = async () => {
 
     console.log("Seed data created:", {
       userId: user.id,
-      ingredient1Id: ingredient1.id,
-      ingredient2Id: ingredient2.id,
       recipeId: recipe.id,
       step1Id: step1.id,
       step2Id: step2.id,
-      recipeIngredientId: recipeIngredient.id,
       sessionId: session.id,
     });
 
