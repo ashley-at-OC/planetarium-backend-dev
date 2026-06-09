@@ -1,5 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
   const Showtime = sequelize.define("showtime", {
+    ingredientId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     startDateTime: {
       type: Sequelize.DATE,
       allowNull: false,

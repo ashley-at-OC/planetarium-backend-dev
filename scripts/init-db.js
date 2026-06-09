@@ -31,54 +31,6 @@ const run = async () => {
       salt: salt,
     });
 
-    const ingredient1 = await db.ingredient.create({
-      name: "Cosmic Journey",
-      description: "A trip through the solar system.",
-      price: 15.0,
-      duration: 60,
-    });
-
-    const ingredient2 = await db.ingredient.create({
-      name: "Stars of Summer",
-      description: "Constellations visible in the northern sky.",
-      price: 12.0,
-      duration: 45,
-    });
-
-    const recipe = await db.recipe.create({
-      name: "Pancakes",
-      description: "A simple pancake recipe",
-      servings: 4,
-      time: 20,
-      isPublished: true,
-      userId: user.id,
-    });
-
-    const step1 = await db.recipeStep.create({
-      stepNumber: 1,
-      instruction: "Mix flour and sugar.",
-      recipeId: recipe.id,
-    });
-
-    const step2 = await db.recipeStep.create({
-      stepNumber: 2,
-      instruction: "Cook on a hot skillet until golden.",
-      recipeId: recipe.id,
-    });
-
-    const recipeIngredient = await db.recipeIngredient.create({
-      quantity: 2,
-      recipeId: recipe.id,
-      recipeStepId: step1.id,
-      ingredientId: ingredient1.id,
-    });
-
-    const recipeIngredientWithoutStep = await db.recipeIngredient.create({
-      quantity: 1,
-      recipeId: recipe.id,
-      recipeStepId: null,
-      ingredientId: ingredient2.id,
-    });
 
     // Seed 60 seats: 6 rows (A-F) x 10 columns. A1, A2, A9, A10 are handicap.
     const rows = ["A", "B", "C", "D", "E", "F"];
@@ -106,12 +58,9 @@ const run = async () => {
 
     console.log("Seed data created:", {
       userId: user.id,
-      ingredient1Id: ingredient1.id,
-      ingredient2Id: ingredient2.id,
       recipeId: recipe.id,
       step1Id: step1.id,
       step2Id: step2.id,
-      recipeIngredientId: recipeIngredient.id,
       sessionId: session.id,
     });
 
