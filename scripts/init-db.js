@@ -58,36 +58,9 @@ const run = async () => {
 
     console.log("Seed data created:", {
       userId: user.id,
-      recipeId: recipe.id,
-      step1Id: step1.id,
-      step2Id: step2.id,
       sessionId: session.id,
+      seatCount: seats.length,
     });
-
-    const foundRecipe = await db.recipe.findByPk(recipe.id, {
-      include: [
-        {
-          model: db.recipeStep,
-          as: "recipeStep",
-        },
-      ],
-    });
-    console.log("Found recipe with steps:", {
-      id: foundRecipe.id,
-      name: foundRecipe.name,
-      stepCount: foundRecipe.recipeStep.length,
-    });
-
-    await db.recipe.update(
-      { name: "Pancakes Deluxe" },
-      { where: { id: recipe.id } }
-    );
-    const updatedRecipe = await db.recipe.findByPk(recipe.id);
-    console.log("Updated recipe name:", updatedRecipe.name);
-
-    await db.recipeStep.destroy({ where: { id: step2.id } });
-    const deletedStep = await db.recipeStep.findByPk(step2.id);
-    console.log("Deleted recipe step 2 exists?", !!deletedStep);
 
     const foundSession = await db.session.findByPk(session.id);
     console.log("Found session:", {
