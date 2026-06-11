@@ -40,21 +40,23 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "deploy/"
-          REMOTE_HOST: "recipe.eaglesoftwareteam.com"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ubuntu
-          TARGET: "nodeapps/recipe-backend"
+          TARGET: "nodeapps/planetarium-backend-dev"
       - name: Execute SSH commmands on remote server
         uses: JimCronqvist/action-ssh@master
         env:
           NAME: "Root"
         with:
-          hosts: ""
+          hosts: "ubuntu@${{ secrets.REMOTE_HOST }}"
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: false
           command: |
-            cd nodeapps/recipe-backend
-            npm install
-            sudo systemctl stop recipe-backend
-            sudo cp recipe-backend.service /lib/systemd/system/recipe-backend.service
-            sudo systemctl daemon-reload
-            sudo systemctl start recipe-backend
+              cd nodeapps/planetarium-backend-dev
+		          sudo systemctl stop mysql
+		          npm ci
+		          sudo systemctl start mysql
+              sudo systemctl stop planetarium-backend-dev
+              sudo cp planetarium-backend-dev.service /lib/systemd/system/planetarium-backend-dev.service
+              sudo systemctl daemon-reload
+              sudo systemctl start planetarium-backend-dev
