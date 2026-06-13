@@ -1,8 +1,8 @@
 const db = require("../models");
 const Recipe = db.recipe;
 const RecipeStep = db.recipeStep;
-const RecipeIngredient = db.recipeIngredient;
-const Ingredient = db.ingredient;
+const RecipeShow = db.recipeShow;
+const Show = db.show;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Recipe
@@ -68,13 +68,13 @@ exports.findAllForUser = async (req, res) => {
           required: false,
           include: [
             {
-              model: RecipeIngredient,
-              as: "recipeIngredient",
+              model: RecipeShow,
+              as: "recipeShow",
               required: false,
               include: [
                 {
-                  model: Ingredient,
-                  as: "ingredient",
+                  model: Show,
+                  as: "show",
                   required: false,
                 },
               ],
@@ -114,13 +114,13 @@ exports.findAllPublished = async (req, res) => {
           required: false,
           include: [
             {
-              model: RecipeIngredient,
-              as: "recipeIngredient",
+              model: RecipeShow,
+              as: "recipeShow",
               required: false,
               include: [
                 {
-                  model: Ingredient,
-                  as: "ingredient",
+                  model: Show,
+                  as: "show",
                   required: false,
                 },
               ],
@@ -160,13 +160,13 @@ exports.findOne = async (req, res) => {
           required: false,
           include: [
             {
-              model: RecipeIngredient,
-              as: "recipeIngredient",
+              model: RecipeShow,
+              as: "recipeShow",
               required: false,
               include: [
                 {
-                  model: Ingredient,
-                  as: "ingredient",
+                  model: Show,
+                  as: "show",
                   required: false,
                 },
               ],

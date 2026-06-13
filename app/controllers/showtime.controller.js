@@ -1,6 +1,6 @@
 const db = require("../models");
 const Showtime = db.showtime;
-const Ingredient = db.ingredient; // shows for now
+const Show = db.show; // shows for now
 const Op = db.Sequelize.Op;
 
 // referencing showtime.controller.js because of its dependency on Recipe
@@ -10,8 +10,8 @@ exports.create = async (req, res) => {
 
     console.log(req);
     // Validate request
-    if (req.body.ingredientId === undefined) {
-        const error = new Error("Ingredient ID cannot be empty for showtime!");
+    if (req.body.showId === undefined) {
+        const error = new Error("Show ID cannot be empty for showtime!");
         error.statusCode = 400;
         throw error;
     }
@@ -36,7 +36,7 @@ exports.create = async (req, res) => {
 
     // Create a Showtime
     const showtime = {
-        ingredientId: req.params.ingredientId,
+        showId: req.params.showId,
         startDateTime: req.body.startDateTime,
         endDateTime: req.body.startDateTime,
         attendeeCount: req.body.attendeeCount,
@@ -79,11 +79,11 @@ exports.findAll = async (req, res) => {
 
 // Retrieve all showtimes for a show
 exports.findAllShowtimesForShow = async (req, res) => {
-    const ingredientId = req.params.ingredientId;
+    const showId = req.params.showId;
 
     try {
         const data = await Showtime.findAll({
-            where: { ingredientId },
+            where: { showId },
             order: [["startDateTime", "ASC"]],
         });
         res.send(data);

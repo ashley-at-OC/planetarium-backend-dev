@@ -16,10 +16,10 @@ module.exports = (app) => {
   // Retrieve all Recipe Steps for a Recipe
   router.get("/recipes/:recipeId/recipeSteps/", RecipeStep.findAllForRecipe);
 
-  // Retrieve all Recipe Steps for a Recipe and include the ingredients
+  // Retrieve all Recipe Steps for a Recipe and include the shows
   router.get(
-    "/recipes/:recipeId/recipeStepsWithIngredients/",
-    RecipeStep.findAllForRecipeWithIngredients
+    "/recipes/:recipeId/recipeStepsWithShows/",
+    RecipeStep.findAllForRecipeWithShows
   );
 
   // Retrieve a single Recipe Step with id
