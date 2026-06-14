@@ -82,4 +82,4 @@ npm run init-db:wipe
 npm run start
 ```
 
-8. Test deploy
+8. Test deploy/trigger workflow
