@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Ingredient = sequelize.define("ingredient", {
+  const Show = sequelize.define("show", {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
@@ -22,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.BLOB("long"), // deal with uploading images later
       allowNull: true, // to test without images
     },
-    duration: {
+    durationMinutes: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
@@ -36,5 +36,5 @@ module.exports = (sequelize, Sequelize) => {
     },
 
   });
-  return Ingredient;
+  return Show;
 };

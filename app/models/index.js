@@ -14,10 +14,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.ingredient = require("./ingredient.model.js")(sequelize, Sequelize);
+db.show = require("./show.model.js")(sequelize, Sequelize);
 db.recipe = require("./recipe.model.js")(sequelize, Sequelize);
 db.recipeStep = require("./recipeStep.model.js")(sequelize, Sequelize);
-db.recipeIngredient = require("./recipeIngredient.model.js")(
+db.recipeShow = require("./recipeShow.model.js")(
   sequelize,
   Sequelize
 );
@@ -66,34 +66,34 @@ db.recipeStep.belongsTo(db.recipe, {
   onDelete: "CASCADE",
 });
 
-// foreign keys for recipeIngredient
-db.recipeStep.hasMany(db.recipeIngredient, {
-  as: "recipeIngredient",
+// foreign keys for recipeShow
+db.recipeStep.hasMany(db.recipeShow, {
+  as: "recipeShow",
   foreignKey: { allowNull: true },
   onDelete: "CASCADE",
 });
-db.recipe.hasMany(db.recipeIngredient, {
-  as: "recipeIngredient",
+db.recipe.hasMany(db.recipeShow, {
+  as: "recipeShow",
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",
 });
-db.ingredient.hasMany(db.recipeIngredient, {
-  as: "recipeIngredient",
+db.show.hasMany(db.recipeShow, {
+  as: "recipeShow",
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",
 });
-db.recipeIngredient.belongsTo(db.recipeStep, {
+db.recipeShow.belongsTo(db.recipeStep, {
   as: "recipeStep",
   foreignKey: { allowNull: true },
   onDelete: "CASCADE",
 });
-db.recipeIngredient.belongsTo(db.recipe, {
+db.recipeShow.belongsTo(db.recipe, {
   as: "recipe",
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",
 });
-db.recipeIngredient.belongsTo(db.ingredient, {
-  as: "ingredient",
+db.recipeShow.belongsTo(db.show, {
+  as: "show",
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",
 });
@@ -114,12 +114,12 @@ db.booking.belongsTo(db.user, {
 // Show -> Showtimes
 db.show.hasMany(db.showtime, {
   as: "showtimes",
-  foreignKey: "ingredientId",
+  foreignKey: "showId",
   onDelete: "CASCADE",
 });
-db.showtime.belongsTo(db.ingredient, {
-  as: "ingredient",
-  foreignKey: "ingredientId",
+db.showtime.belongsTo(db.show, {
+  as: "show",
+  foreignKey: "showId",
   onDelete: "CASCADE",
 });
 

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Showtime = sequelize.define("showtime", {
-    ingredientId: {
+    showId: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },

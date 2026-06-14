@@ -5,22 +5,22 @@ module.exports = (app) => {
 
     // reference recipeStep.routes.js
 
-    // Create a new Showtime for a Show (Ingredient)
+    // Create a new Showtime for a Show (Show)
     router.post(
-        "/ingredients/:ingredientId/showtimes",
+        "/shows/:showId/showtimes",
         [authenticateRoute],
         Showtime.create
     );
 
-    // Retrieve all Showtimes for a Show (Ingredient)
-    router.get("/ingredients/:ingredientId/showtimes", Showtime.findAllShowtimesForShow);
+    // Retrieve all Showtimes for a Show (Show)
+    router.get("/shows/:showId/showtimes", Showtime.findAllShowtimesForShow);
 
 
     // Update a Showtime with id
-    router.put("/ingredients/:ingredientId/showtimes/:id", Showtime.update);
+    router.put("/shows/:showId/showtimes/:id", Showtime.update);
     // Delete a Showtime with id
     router.delete(
-        "/ingredients/:ingredientId/showtimes/:id", Showtime.delete);
+        "/shows/:showId/showtimes/:id", Showtime.delete);
 
     app.use("/recipeapi", router);
 }

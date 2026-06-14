@@ -1,7 +1,7 @@
 const db = require("../models");
 const RecipeStep = db.recipeStep;
-const RecipeIngredient = db.recipeIngredient;
-const Ingredient = db.ingredient;
+const RecipeShow = db.recipeShow;
+const Show = db.show;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new RecipeStep
@@ -44,10 +44,10 @@ exports.findAll = async (req, res) => {
   const recipeStepId = req.query.recipeStepId;
   var condition = recipeStepId
     ? {
-        id: {
-          [Op.like]: `%${recipeStepId}%`,
-        },
-      }
+      id: {
+        [Op.like]: `%${recipeStepId}%`,
+      },
+    }
     : null;
 
   try {
@@ -80,21 +80,21 @@ exports.findAllForRecipe = async (req, res) => {
   }
 };
 
-// Find all RecipeSteps for a recipe and include the ingredients
-exports.findAllForRecipeWithIngredients = async (req, res) => {
+// Find all RecipeSteps for a recipe and include the shows
+exports.findAllForRecipeWithShows = async (req, res) => {
   const recipeId = req.params.recipeId;
   try {
     const data = await RecipeStep.findAll({
       where: { recipeId: recipeId },
       include: [
         {
-          model: RecipeIngredient,
-          as: "recipeIngredient",
+          model: RecipeShow,
+          as: "recipeShow",
           required: false,
           include: [
             {
-              model: Ingredient,
-              as: "ingredient",
+              model: Show,
+              as: "show",
               required: false,
             },
           ],
@@ -107,7 +107,7 @@ exports.findAllForRecipeWithIngredients = async (req, res) => {
     res.status(500).send({
       message:
         err.message ||
-        "Some error occurred while retrieving recipeIngredients for a recipe step.",
+        "Some error occurred while retrieving recipeShows for a recipe step.",
     });
   }
 };

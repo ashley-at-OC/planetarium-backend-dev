@@ -56,11 +56,7 @@ const run = async () => {
       expirationDate: new Date(Date.now() + 24 * 60 * 60 * 1000),
     });
 
-    console.log("Seed data created:", {
-      userId: user.id,
-      sessionId: session.id,
-      seatCount: seats.length,
-    });
+
 
     const foundSession = await db.session.findByPk(session.id);
     console.log("Found session:", {

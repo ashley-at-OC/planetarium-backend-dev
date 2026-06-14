@@ -153,6 +153,7 @@ exports.update = async (req, res) => {
     const number = await User.update(req.body, {
       where: { id: id },
     });
+
     if (number == 1) {
       res.send({
         message: "User was updated successfully.",

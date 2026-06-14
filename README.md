@@ -1,6 +1,6 @@
 # Recipe Backend with Node
 
-This application allows users to create and maintain a list of recipes that have steps and ingredients. Please visit https://github.com/mattmiller64/recipe-frontend for the Vue 3 frontend repository.
+This application allows users to create and maintain a list of recipes that have steps and shows. Please visit https://github.com/mattmiller64/recipe-frontend for the Vue 3 frontend repository.
 
 #### Please note:
 
