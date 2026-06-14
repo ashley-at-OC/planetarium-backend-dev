@@ -3,7 +3,7 @@ name: AWS DEPLOY TO STAGING
 
 on:
   workflow_dispatch:
-  
+
   pull_request:
     types: [closed]
     branches:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: main
       - uses: actions/setup-node@v1
       - run: npm install
 
