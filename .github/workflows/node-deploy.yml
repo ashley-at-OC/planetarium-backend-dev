@@ -52,11 +52,11 @@ jobs:
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: false
           command: |
-              cd nodeapps/planetarium-backend-dev
-		          sudo systemctl stop mysql
-		          npm ci
-		          sudo systemctl start mysql
-              sudo systemctl stop planetarium-backend-dev
-              sudo cp planetarium-backend-dev.service /lib/systemd/system/planetarium-backend-dev.service
-              sudo systemctl daemon-reload
-              sudo systemctl start planetarium-backend-dev
+               cd nodeapps/planetarium-backend-dev
+               sudo systemctl stop mysql
+               npm ci
+               sudo systemctl start mysql
+               sudo systemctl stop planetarium-backend-dev
+               sudo cp planetarium-backend-dev.service /lib/systemd/system/planetarium-backend-dev.service
+               sudo systemctl daemon-reload
+               sudo systemctl start planetarium-backend-dev
