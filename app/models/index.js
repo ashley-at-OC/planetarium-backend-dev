@@ -28,7 +28,7 @@ db.show = require("./show.model.js")(sequelize, Sequelize);
 db.showtime = require("./showtime.model.js")(sequelize, Sequelize);
 db.booking = require("./booking.model.js")(sequelize, Sequelize);
 db.ticket = require("./ticket.model.js")(sequelize, Sequelize);
-db.paymentTransaction = require("./paymentTransaction.model.js")(sequelize, Sequelize);
+db.paymentTransaction = require("./transaction.model.js")(sequelize, Sequelize);
 
 // foreign key for session
 db.user.hasMany(db.session, {
