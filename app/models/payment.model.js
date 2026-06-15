@@ -1,11 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Transaction = sequelize.define("paymentTransaction", {
-
-    bookingId:
-    {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
+  const Payment = sequelize.define("paymentTransaction", {
     paymentMethod: {
       type: Sequelize.ENUM("credit_card", "debit_card", "paypal"),
       allowNull: false,
@@ -25,5 +19,5 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
 
-  return PaymentTransaction;
+  return Payment;
 };
