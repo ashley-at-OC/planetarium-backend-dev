@@ -103,12 +103,12 @@ exports.update = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const num = await booking.update(req.body, {
+        const num = await Booking.update(req.body, {
             where: { id: id },
         });
         if (num == 1) {
             res.send({
-                message: "Booking was updated successfully.",
+                message: `Booking ${id} was updated successfully.`,
             });
         } else {
             res.send({
