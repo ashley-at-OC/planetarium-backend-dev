@@ -49,6 +49,7 @@ exports.create = async (req, res) => {
       email: req.body.email,
       password: hash,
       salt: salt,
+      role: req.body.role,
     };
 
     try {
