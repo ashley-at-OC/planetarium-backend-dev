@@ -6,7 +6,7 @@ module.exports = (app) => {
     router.post("/payments/", Payment.create);
 
     // Retrieve all Payments with a BookingId
-    router.get("/payments/booking/:bookingId", Payment.findAllPaymentsByBookingId);
+    router.get("/bookings/:bookingId/payments/", Payment.findAllPaymentsByBookingId);
 
     // Retrieve all Payment
     router.get("/payments/", Payment.findAll);

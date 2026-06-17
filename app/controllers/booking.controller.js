@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
     }
 
     if (!req.body.totalPrice) {
-        const error = new Error("Total price cannot be empty for an show!");
+        const error = new Error("Total price cannot be empty for an booking!");
         error.statusCode = 400;
         throw error;
     }
@@ -55,12 +55,12 @@ exports.findAll = async (req, res) => {
         : null;
 
     try {
-        const data = await Show.findAll({ where: condition, order: [["id", "ASC"]] }); // in ascending order
+        const data = await Booking.findAll({ where: condition, order: [["userId", "ASC"]] }); // in ascending order
         res.send(data);
     } catch (err) {
         res.status(500).send({
             message:
-                err.message || "Some error occurred while retrieving shows.",
+                err.message || "Some error occurred while retrieving bookings.",
         });
     }
 };
@@ -93,12 +93,12 @@ exports.findOne = async (req, res) => {
         res.send(data);
     } catch (err) {
         res.status(500).send({
-            message: err.message || "Error retrieving Show with id=" + id,
+            message: err.message || "Error retrieving Booking with id=" + id,
         });
     }
 };
 
-// Update a Show by the id in the request
+// Update a Booking by the id in the request
 exports.update = async (req, res) => {
     const id = req.params.id;
 
@@ -122,7 +122,7 @@ exports.update = async (req, res) => {
     }
 };
 
-// Delete a Show with the specified id in the request
+// Delete a Booking with the specified id in the request
 exports.delete = async (req, res) => {
     const id = req.params.id;
 
@@ -146,7 +146,7 @@ exports.delete = async (req, res) => {
     }
 };
 
-// Delete all Shows from the database.
+// Delete all Bookings from the database.
 exports.deleteAll = async (req, res) => {
     try {
         const number = await Booking.destroy({

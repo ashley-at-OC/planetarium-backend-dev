@@ -29,11 +29,6 @@ exports.create = async (req, res) => {
         throw error;
     }
 
-    if (!req.body.paidAt) {
-        const error = new Error("Paid at cannot be empty for an show!");
-        error.statusCode = 400;
-        throw error;
-    }
 
     // Create a Payment using the data from the request
     const payment = {
@@ -41,7 +36,6 @@ exports.create = async (req, res) => {
         paymentStatus: req.body.paymentStatus,
         paymentMethod: req.body.paymentMethod,
         amount: req.body.amount,
-        paidAt: req.body.paidAt,
     };
 
     // Save Payment in the database
@@ -68,7 +62,7 @@ exports.findAll = async (req, res) => {
         : null;
 
     try {
-        const data = await Show.findAll({ where: condition, order: [["id", "ASC"]] }); // in ascending order
+        const data = await Payment.findAll({ where: condition, order: [["id", "ASC"]] }); // in ascending order
         res.send(data);
     } catch (err) {
         res.status(500).send({
@@ -116,7 +110,7 @@ exports.update = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const num = await payment.update(req.body, {
+        const num = await Payment.update(req.body, {
             where: { id: id },
         });
         if (num == 1) {
