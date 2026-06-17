@@ -13,10 +13,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DECIMAL(8, 2),
       allowNull: false,
     },
-    paidAt: {
-      type: Sequelize.DATE,
-      allowNull: true,
-    },
   });
 
   return PaymentTransaction;
