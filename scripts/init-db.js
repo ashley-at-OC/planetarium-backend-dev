@@ -29,6 +29,7 @@ const run = async () => {
       email: "test@example.com",
       password: passwordHash,
       salt: salt,
+      role: "admin",
     });
 
 
