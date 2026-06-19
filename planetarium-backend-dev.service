@@ -1,13 +1,16 @@
 [Unit]
 Description=NodeJS planetarium-backend-dev
-After=network.target
+After=network.target mysql.service
+Requires=mysql.service
 
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory=/home/ubuntu/nodeapps/planetarium-backend-dev/
-ExecStart=/usr/bin/npm run start
-Restart=on-failure
+WorkingDirectory=/home/ubuntu/nodeapps/planetarium-backend-dev
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
 
 [Install]
 WantedBy=multi-user.target
