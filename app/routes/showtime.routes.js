@@ -15,6 +15,9 @@ module.exports = (app) => {
     // Retrieve all Showtimes for a Show (Show)
     router.get("/shows/:showId/showtimes", Showtime.findAllShowtimesForShow);
 
+    // Retrieve a showtime
+    router.get("/showtimes/:id", Showtime.findOne);
+
 
     // Update a Showtime with id
     router.put("/shows/:showId/showtimes/:id", Showtime.update);

@@ -51,6 +51,8 @@ require("./app/routes/user.routes")(app);
 require("./app/routes/showtime.routes.js")(app);
 require("./app/routes/booking.routes.js")(app);
 require("./app/routes/payment.routes.js")(app);
+require("./app/routes/ticket.routes.js")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3200;
