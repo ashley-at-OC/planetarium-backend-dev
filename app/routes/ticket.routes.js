@@ -26,5 +26,5 @@ module.exports = (app) => {
     // Create a new Ticket
     router.delete("/tickets/", [authenticateRoute], Ticket.deleteAll);
 
-    app.use("/recipeapi", router);
+    app.use("/planetariumapi", router);
 };

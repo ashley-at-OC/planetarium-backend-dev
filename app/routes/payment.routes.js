@@ -23,5 +23,5 @@ module.exports = (app) => {
     // Create a new Payment
     router.delete("/payments/", [authenticateRoute], Payment.deleteAll);
 
-    app.use("/recipeapi", router);
+    app.use("/planetariumapi", router);
 };

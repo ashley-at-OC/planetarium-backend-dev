@@ -23,5 +23,5 @@ module.exports = (app) => {
     // Create a new Booking
     router.delete("/bookings/", [authenticateRoute], Booking.deleteAll);
 
-    app.use("/recipeapi", router);
+    app.use("/planetariumapi", router);
 };

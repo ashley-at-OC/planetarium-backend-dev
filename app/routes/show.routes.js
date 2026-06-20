@@ -21,5 +21,5 @@ module.exports = (app) => {
   // Create a new Show
   router.delete("/shows/", [authenticateRoute], Show.deleteAll);
 
-  app.use("/recipeapi", router);
+  app.use("/planetariumapi", router);
 };
