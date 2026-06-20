@@ -52,5 +52,5 @@ module.exports = (app) => {
     RecipeShow.deleteAll
   );
 
-  app.use("/recipeapi", router);
+  app.use("/planetariumapi", router);
 };

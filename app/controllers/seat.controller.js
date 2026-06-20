@@ -3,7 +3,7 @@ const Seat = db.seat;
 const Ticket = db.ticket;
 const { Op } = db.Sequelize;
 
-// GET /recipeapi/seats
+// GET /planetariumapi/seats
 exports.findAll = async (req, res) => {
   try {
     const seats = await Seat.findAll({

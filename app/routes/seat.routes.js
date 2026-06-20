@@ -1,4 +1,4 @@
-// Routes for seat endpoints. Endpoints are /recipeapi/seats.
+// Routes for seat endpoints. Endpoints are /planetariumapi/seats.
 module.exports = (app) => {
   const Seat = require("../controllers/seat.controller.js");
   var router = require("express").Router();
@@ -6,5 +6,5 @@ module.exports = (app) => {
   // Returns the full seat list.
   router.get("/seats", Seat.findAll);
 
-  app.use("/recipeapi", router);
+  app.use("/planetariumapi", router);
 };

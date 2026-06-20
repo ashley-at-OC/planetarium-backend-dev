@@ -25,5 +25,5 @@ module.exports = (app) => {
     router.delete(
         "/shows/:showId/showtimes/:id", Showtime.delete);
 
-    app.use("/recipeapi", router);
+    app.use("/planetariumapi", router);
 }
