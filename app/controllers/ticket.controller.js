@@ -5,6 +5,9 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Ticket
 exports.create = async (req, res) => {
+
+    console.log("Request:", req.body);
+
     // Validate request, making sure data in request actually exists 
     if (!req.body.bookingId) {
         const error = new Error("Booking Id cannot be empty for an ticket!");
@@ -40,16 +43,7 @@ exports.create = async (req, res) => {
         error.statusCode = 400;
         throw error;
     }
-    if (!req.body.emailedAt) {
-        const error = new Error("Emailed at cannot be empty for an ticket!");
-        error.statusCode = 400;
-        throw error;
-    }
-    if (!req.body.scannedAt) {
-        const error = new Error("Scanned at cannot be empty for an ticket!");
-        error.statusCode = 400;
-        throw error;
-    }
+
 
     if (!req.body.qrCode) {
         const error = new Error("QR code cannot be empty for a ticket!");
@@ -109,7 +103,7 @@ exports.findAllTicketsByBookingId = async (req, res) => {
     const bookingId = req.params.bookingId;
 
     try {
-        const data = await Booking.findAll({
+        const data = await Ticket.findAll({
             where: { bookingId },
             order: [["id", "ASC"]],
         });
@@ -122,6 +116,27 @@ exports.findAllTicketsByBookingId = async (req, res) => {
         });
     }
 };
+
+
+
+exports.findAllTicketsByShowtimeId = async (req, res) => {
+    const showtimeId = req.params.showtimeId;
+
+    try {
+        const data = await Ticket.findAll({
+            where: { showtimeId },
+            order: [["id", "ASC"]],
+        });
+        res.send(data);
+    } catch (err) {
+        res.status(500).send({
+            message:
+                err.message ||
+                "Some error occurred while retrieving tickets for a showtime.",
+        });
+    }
+};
+
 
 // Find a single Ticket with an id
 exports.findOne = async (req, res) => {

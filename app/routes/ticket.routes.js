@@ -6,7 +6,10 @@ module.exports = (app) => {
     router.post("/tickets/", Ticket.create);
 
     // Retrieve all Tickets with a UserId
-    router.get("/tickets/user/:bookingId", Ticket.findAllTicketsByBookingId);
+    router.get("/tickets/booking/:bookingId", Ticket.findAllTicketsByBookingId);
+
+    // Retrieve all Tickets with a ShowtimeId
+    router.get("/tickets/showtime/:showtimeId", Ticket.findAllTicketsByShowtimeId);
 
     // Retrieve all Ticket
     router.get("/tickets/", Ticket.findAll);
