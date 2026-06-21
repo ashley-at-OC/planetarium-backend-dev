@@ -35,6 +35,7 @@ exports.create = async (req, res) => {
     try {
         const data = await Booking.create(booking);
         res.send(data);
+        return data;
     } catch (err) {
         res.status(500).send({
             message:
