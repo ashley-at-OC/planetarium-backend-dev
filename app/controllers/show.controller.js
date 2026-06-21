@@ -40,7 +40,7 @@ exports.create = async (req, res) => {
     description: req.body.description,
     price: req.body.price,
     durationMinutes: req.body.durationMinutes,
-
+    imageURL: req.body.imageURL,
   };
   // Save Show in the database
   try {
