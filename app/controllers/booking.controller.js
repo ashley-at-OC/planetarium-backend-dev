@@ -3,6 +3,13 @@ const User = db.user;
 const Booking = db.booking;
 const Op = db.Sequelize.Op;
 
+//email 
+const Ticket = db.ticket;
+const Seat = db.seat;
+const Showtime = db.showtime;
+const Show = db.show;
+const { sendSeatConfirmationEmail } = require("../services/email.service");
+
 // Create and Save a new Booking
 exports.create = async (req, res) => {
     // Validate request, making sure data in request actually exists 
@@ -160,4 +167,78 @@ exports.deleteAll = async (req, res) => {
                 err.message || "Some error occurred while removing all bookings.",
         });
     }
+};
+
+
+//email
+exports.emailConfirmation = async (req, res) => {
+  const bookingId = req.params.bookingId;
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).send({
+      success: false,
+      message: "Email is required.",
+    });
+  }
+
+  try {
+    const booking = await Booking.findByPk(bookingId);
+
+    if (!booking) {
+      return res.status(404).send({
+        success: false,
+        message: "Booking not found.",
+      });
+    }
+
+    const tickets = await Ticket.findAll({
+      where: { bookingId },
+      include: [
+        {
+          model: Seat,
+          as: "seat",
+        },
+        {
+          model: Showtime,
+          as: "showtime",
+          include: [
+            {
+              model: Show,
+              as: "show",
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!tickets.length) {
+      return res.status(404).send({
+        success: false,
+        message: "No tickets found for this booking.",
+      });
+    }
+
+    await sendSeatConfirmationEmail({
+      to: email,
+      booking,
+      tickets,
+    });
+
+    await Ticket.update(
+      { emailedAt: new Date() },
+      { where: { bookingId } }
+    );
+
+    res.send({
+      success: true,
+      message: "Seat confirmation email sent successfully.",
+    });
+  } catch (err) {
+    console.error("Email confirmation error:", err);
+    res.status(500).send({
+      success: false,
+      message: err.message || "Could not send confirmation email.",
+    });
+  }
 };

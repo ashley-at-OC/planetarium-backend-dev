@@ -23,5 +23,8 @@ module.exports = (app) => {
     // Create a new Booking
     router.delete("/bookings/", [authenticateRoute], Booking.deleteAll);
 
+    //send email confirmation
+    router.post("/bookings/:bookingId/email-confirmation", Booking.emailConfirmation);
+
     app.use("/planetariumapi", router);
 };
