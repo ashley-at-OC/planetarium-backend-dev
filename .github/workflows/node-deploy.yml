@@ -48,6 +48,10 @@ jobs:
           echo "DB_USER=$DB_USER" >> .env
           echo "DB_NAME=$DB_NAME" >> .env
           echo "SECRET_KEY=$SECRET_KEY" >> .env
+          echo "EMAIL_SERVICE=${{ secrets.EMAIL_SERVICE }}" >> .env
+          echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env
+          echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> .env
+          echo "EMAIL_FROM=${{ secrets.EMAIL_FROM }}" >> .env
 
       - name: Bundle app
         run: npm run bundle
